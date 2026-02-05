@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dneopc6i72eub"]
+
+[ext_resource type="PackedScene" uid="uid://cb163b57c4hkb" path="res://scenes/Player.tscn" id="1_elqb8"]
+[ext_resource type="Texture2D" uid="uid://w2ctr3uu0ttp" path="res://assets/pentagon.png" id="2_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://cq7rncf4bqb5a" path="res://scenes/Bullet.tscn" id="2_rarhs"]
+[ext_resource type="Script" uid="uid://biit21cgfqwmb" path="res://scripts/colored_obstacle.gd" id="3_rarhs"]
+[ext_resource type="Texture2D" uid="uid://dn1t68f3jtwnv" path="res://assets/triangle.png" id="4_vcsgt"]
+[ext_resource type="Texture2D" uid="uid://dlfsgay5moibk" path="res://assets/square.png" id="6_c01mt"]
+
+[node name="Main" type="Node2D" unique_id=15952401]
+
+[node name="Background" type="ColorRect" parent="." unique_id=716438092]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.047058824, 0.03137255, 0.16470589, 1)
+
+[node name="Player" parent="." unique_id=416633226 instance=ExtResource("1_elqb8")]
+position = Vector2(576, 324)
+bullet_scene = ExtResource("2_rarhs")
+
+[node name="Triangle" type="StaticBody2D" parent="." unique_id=1845705155]
+position = Vector2(745, 277)
+rotation = -0.36307043
+script = ExtResource("3_rarhs")
+metadata/_edit_group_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Triangle" unique_id=2117843886]
+scale = Vector2(1.3905752, 1.6631308)
+polygon = PackedVector2Array(0, -26.456131, -36.675476, 26.456123, 36.675476, 26.456123)
+
+[node name="Sprite2D" type="Sprite2D" parent="Triangle" unique_id=440213316]
+scale = Vector2(0.34289736, 0.34289736)
+texture = ExtResource("4_vcsgt")
+
+[node name="Pentagon" type="StaticBody2D" parent="." unique_id=2048784518]
+position = Vector2(423, 146)
+rotation = 0.575235
+script = ExtResource("3_rarhs")
+metadata/_edit_group_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Pentagon" unique_id=573893525]
+scale = Vector2(1.3905752, 1.6631308)
+polygon = PackedVector2Array(-36.675472, -6.614032, -22.292934, 28.861233, 23.01206, 28.861233, 36.67547, -6.614032, 0, -28.861229)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pentagon" unique_id=1720051063]
+scale = Vector2(0.34289736, 0.34289736)
+texture = ExtResource("2_0bbpv")
+
+[node name="Square" type="StaticBody2D" parent="." unique_id=1418164559]
+position = Vector2(397.99994, 440.99997)
+rotation = -1.1451796
+scale = Vector2(0.99999994, 0.99999994)
+script = ExtResource("3_rarhs")
+metadata/_edit_group_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Square" unique_id=589475258]
+scale = Vector2(1.3905752, 1.6631308)
+polygon = PackedVector2Array(-34.91919, -29.431274, -34.82422, 29.340088, 34.451294, 29.311035, 34.894043, -29.061035)
+
+[node name="Sprite2D" type="Sprite2D" parent="Square" unique_id=2077912469]
+texture_filter = 1
+scale = Vector2(0.34289736, 0.34289736)
+texture = ExtResource("6_c01mt")
