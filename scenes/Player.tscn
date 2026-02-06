@@ -7,6 +7,7 @@
 size = Vector2(32.526917, 32.526917)
 
 [node name="Player" type="CharacterBody2D" unique_id=1621259819]
+motion_mode = 1
 script = ExtResource("1_v6fml")
 metadata/_edit_group_ = true
 

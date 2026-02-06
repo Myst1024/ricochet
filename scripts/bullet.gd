@@ -30,8 +30,9 @@ func _physics_process(delta: float) -> void:
 		ray_cast_2d.force_raycast_update()
 		
 		var collider = ray_cast_2d.get_collider()
-		
-		if collider is ColoredObstacle:
+		if collider:
+			print(collider)
+		if collider is Obstacle:
 			# 1. Get the global point where the ray hit
 			var global_hit_point = ray_cast_2d.get_collision_point()
 			

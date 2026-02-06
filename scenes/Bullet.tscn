@@ -8,6 +8,7 @@ script = ExtResource("1_p1sfj")
 
 [node name="ArrowRight" type="Sprite2D" parent="." unique_id=232662869]
 visible = false
+z_index = 1
 position = Vector2(-20, 0)
 scale = Vector2(0.4112779, 0.33127913)
 texture = ExtResource("1_hf8mt")

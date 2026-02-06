@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("right"):
 		direction += Vector2.RIGHT
 		
-	velocity = direction * speed
+	velocity = direction.normalized() * speed
 	move_and_slide()
 
 func shoot() -> void:
