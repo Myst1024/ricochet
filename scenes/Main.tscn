@@ -18,24 +18,24 @@ bullet_scene = ExtResource("2_rarhs")
 [node name="Obstacles" type="Node" parent="." unique_id=1511445945]
 
 [node name="Obstacle" parent="Obstacles" unique_id=1071734007 instance=ExtResource("7_nxtc6")]
-modulate = Color(1, 0.976, 0.443, 1)
+modulate = Color(0.933, 0.192, 0.275, 1)
 position = Vector2(342, 189)
-color = Color(1, 0.976, 0.443, 1)
+color = Color(1, 0, 0.11764706, 1)
 
 [node name="Obstacle2" parent="Obstacles" unique_id=2147407457 instance=ExtResource("7_nxtc6")]
 modulate = Color(0.933, 0.192, 0.275, 1)
 position = Vector2(653, 187)
 sides = 4
-color = Color(0.933, 0.192, 0.275, 1)
+color = Color(0.31666672, 1, 0, 1)
 
 [node name="Obstacle3" parent="Obstacles" unique_id=1240215022 instance=ExtResource("7_nxtc6")]
-modulate = Color(0.314, 0.702, 0.255, 1)
+modulate = Color(0.933, 0.192, 0.275, 1)
 position = Vector2(426, 379)
 sides = 5
-color = Color(0.314, 0.702, 0.255, 1)
+color = Color(0, 0.1333332, 1, 1)
 
 [node name="Obstacle4" parent="Obstacles" unique_id=1825495541 instance=ExtResource("7_nxtc6")]
-modulate = Color(0.027, 0, 0.8, 1)
+modulate = Color(0.933, 0.192, 0.275, 1)
 position = Vector2(735, 389)
 sides = 18
-color = Color(0.027, 0, 0.8, 1)
+color = Color(0.9666667, 1, 0, 1)

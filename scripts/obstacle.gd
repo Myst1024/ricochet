@@ -11,8 +11,6 @@ class_name Obstacle
 	set(value):
 		radius = value
 		draw_shape()
-		
-@export var color: Color
 
 var colors = {
 	red = Color(0.933, 0.192, 0.275, 1.0), 
@@ -20,6 +18,11 @@ var colors = {
 	blue = Color(0.027, 0.0, 0.8, 1.0), 
 	yellow = Color(1.0, 0.976, 0.443, 1.0)
 }
+
+@export var color: Color = colors.red
+
+
+
 
 func _ready() -> void:
 	draw_shape()
@@ -29,7 +32,6 @@ func draw_shape():
 	if not is_inside_tree():
 		return
 		
-	color = colors.values().pick_random()
 	modulate = color
 
 	var polygonPoints := PackedVector2Array()

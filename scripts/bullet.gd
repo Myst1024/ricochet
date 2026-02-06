@@ -91,8 +91,14 @@ func spawn_bounce(collision_global_pos, normal, new_color: Color):
 	next_beam.distance_traveled = distance_traveled
 
 func combine_colors(old_color: Color, new_color: Color):
-	var old_hue = old_color.h
-	var new_hue = new_color.h
+	var h1 = old_color.h
+	var h2 = new_color.h
 	
-	var mixed_hue = lerp_angle(old_hue * TAU, new_hue * TAU, 0.5) / TAU
+	# If the distance between hues is > 0.5, the "shortest path" 
+	# goes through Red. We want the "long path" to get Green.
+	if abs(h1 - h2) > 0.5:
+		if h1 > h2: h2 += 1.0
+		else: h1 += 1.0
+		
+	var mixed_hue = fmod((h1 + h2) / 2.0, 1.0)
 	return Color.from_hsv(mixed_hue, 1.0, 1.0)
