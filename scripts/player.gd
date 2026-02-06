@@ -6,7 +6,7 @@ class_name Player
 func _ready() -> void:
 	pass
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var mouse_pos = get_global_mouse_position()
 
 	look_at(mouse_pos)
@@ -30,6 +30,5 @@ func shoot() -> void:
 	var bullet = bullet_scene.instantiate()
 	bullet.rotation = global_rotation
 	bullet.global_position = global_position
-	get_tree().root.add_child(bullet)
-	print('bang')
+	get_parent().add_child(bullet)
 	

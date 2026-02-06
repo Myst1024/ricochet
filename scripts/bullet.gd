@@ -30,8 +30,6 @@ func _physics_process(delta: float) -> void:
 		ray_cast_2d.force_raycast_update()
 		
 		var collider = ray_cast_2d.get_collider()
-		if collider:
-			print(collider)
 		if collider is Obstacle:
 			# 1. Get the global point where the ray hit
 			var global_hit_point = ray_cast_2d.get_collision_point()
@@ -74,7 +72,7 @@ func spawn_bounce(collision_global_pos, normal, new_color: Color):
 	
 	var next_beam = load(self.scene_file_path).instantiate()
 	# IMPORTANT: Add to root so it's independent
-	get_tree().root.add_child(next_beam)
+	get_parent().add_child(next_beam)
 	
 	if modulate == Color(1.0, 1.0, 1.0, 1.0):
 		next_beam.modulate = Color.from_hsv(new_color.h, 1, 1)
