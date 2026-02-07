@@ -1,5 +1,6 @@
 extends StaticBody2D
 class_name ColoredObstacle
+class_name ColoredObstacle
 var colors = {
 	red = Color(0.933, 0.192, 0.275, 1.0), 
 	green = Color(0.314, 0.702, 0.255, 1.0), 

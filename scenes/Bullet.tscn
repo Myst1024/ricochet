@@ -1,21 +1,13 @@
 [gd_scene format=3 uid="uid://cq7rncf4bqb5a"]
 
-[ext_resource type="Texture2D" uid="uid://b2q1u201a2v53" path="res://assets/arrow_right.png" id="1_hf8mt"]
 [ext_resource type="Script" uid="uid://dej2e0ixl8pce" path="res://scripts/bullet.gd" id="1_p1sfj"]
 
 [node name="Bullet" type="Node2D" unique_id=204187024]
 script = ExtResource("1_p1sfj")
-
-[node name="ArrowRight" type="Sprite2D" parent="." unique_id=232662869]
-visible = false
-z_index = 1
-position = Vector2(-20, 0)
-scale = Vector2(0.4112779, 0.33127913)
-texture = ExtResource("1_hf8mt")
+max_range = 1000.0
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=2047197511]
-position = Vector2(-18, 0)
-target_position = Vector2(0, 0)
+target_position = Vector2(18, 0)
 collide_with_areas = true
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1653524364]

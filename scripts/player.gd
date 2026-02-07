@@ -1,9 +1,11 @@
 extends CharacterBody2D
 class_name Player
+
 @export var bullet_scene: PackedScene
 @export var speed := 200
 
 func _ready() -> void:
+	add_to_group("player")
 	pass
 	
 func _process(_delta: float) -> void:

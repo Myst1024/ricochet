@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://x1och8enbvwa"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_mf4mk"]
+vertices = PackedVector2Array(310.71875, 1209.3594, 611.1094, 990.4297, 796.14844, 923.5, 1230.5078, 921.97656, 1605.3906, 1428.0625, 1235.7734, 910.1406, 1558.4063, 472.6797, 640.96875, 808.4297, 940.9297, 581.6094, 559.5, 821.8906, 334.32813, 808.4297, 429.72656, 921.2422, 496.6172, 1019.71875, 640.96875, 579.21875, 227.09375, 275.7422, 334.32813, 579.21875)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 4, 3), PackedInt32Array(2, 1, 7, 8), PackedInt32Array(7, 1, 9), PackedInt32Array(10, 7, 9), PackedInt32Array(10, 9, 11), PackedInt32Array(12, 1, 0), PackedInt32Array(8, 7, 13), PackedInt32Array(6, 5, 8), PackedInt32Array(14, 6, 8, 13), PackedInt32Array(14, 13, 15), PackedInt32Array(0, 14, 15, 10), PackedInt32Array(12, 0, 10, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(216, 264, 1568, 464, 1616, 1440, 301.4551, 1217.9359), PackedVector2Array(1224, 912, 944, 600, 811.269, 913.4519)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_37kl0"]
+size = Vector2(20.82277, 11.177025)
+
+[node name="Node2D" type="Node2D" unique_id=1846836660]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1348760879 groups=["navigation_polygon_source_geometry_group"]]
+position = Vector2(-103.99994, -695.99994)
+scale = Vector2(1.8045801, 1.6027114)
+navigation_polygon = SubResource("NavigationPolygon_mf4mk")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D" unique_id=1696842885 groups=["navigation_polygon_source_geometry_group"]]
+position = Vector2(57.6311, 434.26404)
+scale = Vector2(0.5541455, 0.62394255)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D" unique_id=1361310353 groups=["navigation_polygon_source_geometry_group"]]
+position = Vector2(775.99994, 416.00006)
+scale = Vector2(24.841154, 30.000298)
+shape = SubResource("RectangleShape2D_37kl0")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="NavigationRegion2D" unique_id=464129503 groups=["navigation_polygon_source_geometry_group"]]
+position = Vector2(57.6311, 434.264)
+scale = Vector2(0.5541455, 0.6239426)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/StaticBody2D2" unique_id=784526951 groups=["navigation_polygon_source_geometry_group"]]
+position = Vector2(560, 792)
+polygon = PackedVector2Array(136, -8, 336, -144, 416, 88, 240, 128)

@@ -11,29 +11,18 @@ class_name Obstacle
 	set(value):
 		radius = value
 		draw_shape()
+		
 
-var colors = {
-	red = Color(0.933, 0.192, 0.275, 1.0), 
-	green = Color(0.314, 0.702, 0.255, 1.0), 
-	blue = Color(0.027, 0.0, 0.8, 1.0), 
-	yellow = Color(1.0, 0.976, 0.443, 1.0)
-}
+@export var color: Colors.ColorOptions = Colors.ColorOptions.BLUE
 
-@export var color: Color = colors.red
-
-
-
-
-func _ready() -> void:
+func _ready():
+	modulate = Colors.from_enum(color)
 	draw_shape()
-
 
 func draw_shape():
 	if not is_inside_tree():
 		return
-		
-	modulate = color
-
+	
 	var polygonPoints := PackedVector2Array()
 	for i in range(sides):
 		var point = Vector2.from_angle(TAU * i/sides) * radius

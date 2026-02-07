@@ -1,4 +1,5 @@
 extends Node2D
+class_name Bullet
 
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var line: Line2D = $Line2D
@@ -7,11 +8,14 @@ extends Node2D
 @export var beam_length := 80.0
 @export var max_range := 2000.0
 
+signal enemy_down(score: int)
+
 var distance_traveled := 0.0
 var head_pos := Vector2.ZERO
 var tail_pos := Vector2.ZERO
 var is_shrinking := false
 var has_spawned_next := false
+var bounces := 0
 
 func _ready():
 	line.clear_points()
@@ -31,6 +35,8 @@ func _physics_process(delta: float) -> void:
 		
 		var collider = ray_cast_2d.get_collider()
 		if collider is Obstacle:
+			bounces += 1
+			print(bounces)
 			# 1. Get the global point where the ray hit
 			var global_hit_point = ray_cast_2d.get_collision_point()
 			
@@ -42,9 +48,13 @@ func _physics_process(delta: float) -> void:
 			
 			is_shrinking = true
 			
-			var colliding_color: Color = collider.color
+			var colliding_color: Color = collider.modulate
 			
 			spawn_bounce(global_hit_point, ray_cast_2d.get_collision_normal(), colliding_color)
+		elif collider is Enemy and bounces > 0 and contains_color(collider.modulate,modulate):
+			enemy_down.emit(bounces)
+			print('score',bounces)
+			collider.queue_free()
 		else:
 			head_pos += Vector2.RIGHT * move_amt
 			distance_traveled += move_amt
@@ -71,13 +81,11 @@ func spawn_bounce(collision_global_pos, normal, new_color: Color):
 	has_spawned_next = true
 	
 	var next_beam = load(self.scene_file_path).instantiate()
-	# IMPORTANT: Add to root so it's independent
+
 	get_parent().add_child(next_beam)
 	
-	if modulate == Color(1.0, 1.0, 1.0, 1.0):
-		next_beam.modulate = Color.from_hsv(new_color.h, 1, 1)
-	else:
-		next_beam.modulate = combine_colors(modulate, new_color)
+	next_beam.bounces = bounces
+	next_beam.modulate = combine_colors(modulate, new_color)
 	
 	# Set the new origin to the wall hit point
 	next_beam.global_position = collision_global_pos
@@ -91,14 +99,20 @@ func spawn_bounce(collision_global_pos, normal, new_color: Color):
 	next_beam.distance_traveled = distance_traveled
 
 func combine_colors(old_color: Color, new_color: Color):
-	var h1 = old_color.h
-	var h2 = new_color.h
+	if old_color == Color(1.0, 1.0, 1.0, 1.0):
+		return Color.from_hsv(new_color.h, 1, 1)
 	
-	# If the distance between hues is > 0.5, the "shortest path" 
-	# goes through Red. We want the "long path" to get Green.
-	if abs(h1 - h2) > 0.5:
-		if h1 > h2: h2 += 1.0
-		else: h1 += 1.0
-		
-	var mixed_hue = fmod((h1 + h2) / 2.0, 1.0)
-	return Color.from_hsv(mixed_hue, 1.0, 1.0)
+	return old_color + new_color
+	
+static func contains_color(component: Color, container: Color) -> bool:
+	#if (container == Color.WHITE):
+		#return false
+	# Check if container has all the components of the component color
+	print(container, component)
+	if component.r > 0.5 and container.r < 0.5:
+		return false
+	if component.g > 0.5 and container.g < 0.5:
+		return false
+	if component.b > 0.5 and container.b < 0.5:
+		return false
+	return true

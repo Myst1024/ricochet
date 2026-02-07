@@ -2,40 +2,138 @@
 
 [ext_resource type="PackedScene" uid="uid://cb163b57c4hkb" path="res://scenes/Player.tscn" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://cq7rncf4bqb5a" path="res://scenes/Bullet.tscn" id="2_rarhs"]
+[ext_resource type="Script" uid="uid://dne0qg78ewund" path="res://scripts/enemy_spawner.gd" id="4_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://u8hsxpgq7grc" path="res://scenes/enemy.tscn" id="5_c01mt"]
+[ext_resource type="Script" uid="uid://wa53lhlb4md0" path="res://scripts/label.gd" id="6_c01mt"]
 [ext_resource type="PackedScene" uid="uid://2sbts5bi3ldi" path="res://scenes/obstacle.tscn" id="7_nxtc6"]
+
+[sub_resource type="Environment" id="Environment_0bbpv"]
+background_mode = 3
+glow_enabled = true
+glow_strength = 1.31
+glow_bloom = 0.15
+glow_hdr_threshold = 0.93
+
+[sub_resource type="Curve2D" id="Curve2D_nxtc6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -48, -64, 0, 0, 0, 0, 1104, -64, 0, 0, 0, 0, 1104, 592, 0, 0, 0, 0, -48, 592, 0, 0, 0, 0, -48, -64)
+}
+point_count = 5
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vcsgt"]
+vertices = PackedVector2Array(1169.8281, 282.8203, 922.8203, 238.17188, 873.22656, 104, 1560.4063, -486.21875, 528.15625, 166.71094, 528.15625, 105.28906, 598.77344, 104, 736, 241.22656, 748.2031, 326.20313, 663.4375, 393.78906, 1651.3281, 1339.7188, 1125.1797, 529.8281, 663.4375, 502.21094, 686.89844, 520.9219, 517.25, 509.3125, 481.52344, 440, 889.27344, 423.75, 853.89844, 350.3203, 397.54688, 324.42188, 397.54688, 555.5781, 485.03906, 557.21875, 819.6328, 580.1172, 807.89844, 556.1719, 853.89844, 545.6797, 736, -33.226563, -21.773438, -493.78906, 322.92188, 1.2578125, -317.2578, 1256.4297, 322.92188, 270.7422, 261.6797, 368.57813, 882.64844, 485.9922, 632.5, 858.4219, 261.6797, 511.42188)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 9), PackedInt32Array(0, 3, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(1, 16, 17), PackedInt32Array(7, 2, 1, 17, 8), PackedInt32Array(9, 12, 15, 18, 4), PackedInt32Array(19, 15, 14, 20), PackedInt32Array(21, 22, 23, 11), PackedInt32Array(3, 2, 24), PackedInt32Array(25, 3, 24), PackedInt32Array(25, 24, 6, 5, 26), PackedInt32Array(27, 25, 26, 28, 29), PackedInt32Array(23, 30, 11), PackedInt32Array(19, 20, 31, 27), PackedInt32Array(28, 4, 18, 29), PackedInt32Array(27, 29, 32), PackedInt32Array(27, 32, 19), PackedInt32Array(10, 27, 31), PackedInt32Array(11, 10, 31, 21)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -544, 1608, -536, 1704, 1392, -376, 1304)])
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_obstacles"
+agent_radius = 50.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_vcsgt"]
+font_size = 32
 
 [node name="Main" type="Node" unique_id=1659939525]
 
 [node name="Background" type="ColorRect" parent="." unique_id=716438092]
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_left = -1168.0
+offset_top = -936.00006
+offset_right = -16.0
+offset_bottom = -288.00006
+scale = Vector2(8.84, 8.84)
 color = Color(0.047058824, 0.03137255, 0.16470589, 1)
 
-[node name="Player" parent="." unique_id=416633226 instance=ExtResource("1_elqb8")]
+[node name="Player" parent="." unique_id=416633226 groups=["player"] instance=ExtResource("1_elqb8")]
+unique_name_in_owner = true
 position = Vector2(576, 324)
 bullet_scene = ExtResource("2_rarhs")
 
-[node name="Obstacles" type="Node" parent="." unique_id=1511445945]
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=464285992]
+position = Vector2(0, 4)
+
+[node name="Obstacles" type="Node" parent="." unique_id=1511445945 groups=["navigation_obstacles"]]
 
 [node name="Obstacle" parent="Obstacles" unique_id=1071734007 instance=ExtResource("7_nxtc6")]
-modulate = Color(0.933, 0.192, 0.275, 1)
-position = Vector2(342, 189)
-color = Color(1, 0, 0.11764706, 1)
+modulate = Color(1, 0, 0, 1)
+position = Vector2(408, 136)
+scale = Vector2(1.4030498, 1.2319869)
+color = 0
 
 [node name="Obstacle2" parent="Obstacles" unique_id=2147407457 instance=ExtResource("7_nxtc6")]
-modulate = Color(0.933, 0.192, 0.275, 1)
-position = Vector2(653, 187)
+modulate = Color(0, 1, 0, 1)
+position = Vector2(736, 104)
+scale = Vector2(1.3302736, 1.3302736)
 sides = 4
-color = Color(0.31666672, 1, 0, 1)
+color = 1
 
 [node name="Obstacle3" parent="Obstacles" unique_id=1240215022 instance=ExtResource("7_nxtc6")]
-modulate = Color(0.933, 0.192, 0.275, 1)
-position = Vector2(426, 379)
+modulate = Color(0, 0, 1, 1)
+position = Vector2(360, 440)
+scale = Vector2(1.194447, 1.194447)
 sides = 5
-color = Color(0, 0.1333332, 1, 1)
 
 [node name="Obstacle4" parent="Obstacles" unique_id=1825495541 instance=ExtResource("7_nxtc6")]
-modulate = Color(0.933, 0.192, 0.275, 1)
-position = Vector2(735, 389)
-sides = 18
-color = Color(0.9666667, 1, 0, 1)
+modulate = Color(1, 0, 0, 1)
+position = Vector2(776, 448)
+scale = Vector2(1.3888478, 1.3888478)
+sides = 7
+color = 0
+
+[node name="Obstacle5" parent="Obstacles" unique_id=1175781569 instance=ExtResource("7_nxtc6")]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(648, 632)
+rotation = -0.45523098
+scale = Vector2(2.5392346, 2.5392346)
+color = 1
+
+[node name="Obstacle6" parent="Obstacles" unique_id=1471790838 instance=ExtResource("7_nxtc6")]
+modulate = Color(0, 0, 1, 1)
+position = Vector2(1024, 384.00003)
+rotation = -0.6065519
+scale = Vector2(2.1356044, 2.1356044)
+sides = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1900784384]
+environment = SubResource("Environment_0bbpv")
+
+[node name="Enemies" type="Node" parent="." unique_id=1491912458]
+script = ExtResource("4_vcsgt")
+enemy_scene = ExtResource("5_c01mt")
+
+[node name="Path2D" type="Path2D" parent="Enemies" unique_id=501679582]
+position = Vector2(48, 64)
+curve = SubResource("Curve2D_nxtc6")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Enemies/Path2D" unique_id=1101224208]
+position = Vector2(-48, -64)
+
+[node name="Enemy" parent="Enemies" unique_id=1858260260 instance=ExtResource("5_c01mt")]
+speed = 40
+
+[node name="SpawnTimer" type="Timer" parent="Enemies" unique_id=911763045]
+wait_time = 5.0
+autostart = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Enemies" unique_id=603954646]
+navigation_polygon = SubResource("NavigationPolygon_vcsgt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1064567952]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1086765459]
+offset_left = 949.99994
+offset_top = 43.0
+offset_right = 989.99994
+offset_bottom = 83.0
+scale = Vector2(4.6399903, 1)
+color = Color(0, 0, 0, 0.4745098)
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=295446116]
+unique_name_in_owner = true
+z_index = 100
+offset_left = 968.0
+offset_top = 40.0
+offset_right = 1089.0
+offset_bottom = 85.0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_vcsgt")
+script = ExtResource("6_c01mt")
+
+[connection signal="timeout" from="Enemies/SpawnTimer" to="Enemies" method="_on_spawn_timer_timeout"]
